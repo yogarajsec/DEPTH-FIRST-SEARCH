@@ -1,7 +1,7 @@
 # BREADTH-FIRST-SEARCH
 <h1>ExpNo 3 : Implement Breadth First Search Traversal of a Graph</h1> 
-<h3>Name:  </h3>
-<h3>Register Number: </h3>
+<h3>Name:  YOGARAJ S</h3>
+<h3>Register Number: 212223040248 </h3>
 <H3>Aim:</H3>
 <p>To Implement Breadth First Search Traversal of a Graph using Python 3.</p>
 <h3>Theory:</h3>
@@ -102,14 +102,62 @@ G F <BR>
 <h3>Sample Output</h3>
 <hr>
 ['0', '1', '2', '3', '4']
+
+### PROGRAM:
+```
+from collections import deque, defaultdict
+
+def bfs(graph, start, visited, path):
+    queue = deque()
+    path.append(start)
+    queue.append(start)
+    visited[start] = True
+
+    while queue:
+        tmpnode = queue.popleft()
+        for neighbour in graph[tmpnode]:
+            if not visited[neighbour]:
+                path.append(neighbour)
+                queue.append(neighbour)
+                visited[neighbour] = True
+    return path
+
+
+graph = defaultdict(list)
+v, e = map(int, input("Enter vertices and edges: ").split())
+
+# Check if vertices are integers or characters
+is_integer_graph = None
+
+for _ in range(e):
+    u, v = input().split()
+    # Detect type on first edge
+    if is_integer_graph is None:
+        is_integer_graph = u.isdigit()
+    # Convert to int if integer graph
+    if is_integer_graph:
+        u, v = int(u), int(v)
+    graph[u].append(v)
+    graph[v].append(u)
+
+# Choose start automatically
+if is_integer_graph:
+    start = 0
+else:
+    start = 'A'
+
+path = []
+visited = defaultdict(bool)
+traversedpath = bfs(graph, start, visited, path)
+print("BFS Traversal:", traversedpath)
+```
+
+### OUTPUT:
+<img width="601" height="255" alt="image" src="https://github.com/user-attachments/assets/f448fc95-8e96-4e6a-971c-f2ca8fa02860" />
+
+
 <hr>
 <h3>Result:</h3>
 <hr>
 <p>Thus,a Graph was constructed and implementation of Breadth First Search for the same graph was done successfully.</p>
-
-
-
-
-
-
 
